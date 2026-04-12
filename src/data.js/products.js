@@ -4,8 +4,8 @@ const images = {
       "https://theapplewiki.com/images/applewiki/thumb/5/58/IPhone_14_Pro_Max.png/1200px-IPhone_14_Pro_Max.png",
     ],
     samsung: [
-      "https:https://static.alaneesqatar.qa/2016/01/Smooth-castor-wheels-2025-01-21T164611-080_Z4-CQ0kryC.png",
-      "https:https://storage.ghost.io/c/c2/03/c203530f-f8d7-44e0-8253-441466ca83ad/content/images/2025/01/s25ultra1-1-.jpg",
+      "https://tap.azstatic.com/uploads/f460x345/2026%2F03%2F31%2F19%2F35%2F22%2F96fe1e50-1199-4d60-9cae-e1e0d88f92dd%2F72671_oxB1zel7QvLWlgr5mYCVFA.jpg",
+      "https://tap.azstatic.com/uploads/f460x345/2026%2F03%2F31%2F19%2F35%2F22%2F96fe1e50-1199-4d60-9cae-e1e0d88f92dd%2F72671_oxB1zel7QvLWlgr5mYCVFA.jpg",
     ],
     redmi: [
       "https://cdn.akakce.com/z/xiaomi/xiaomi-redmi-note-13.jpg",
