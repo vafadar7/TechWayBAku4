@@ -1,29 +1,4 @@
-const images = {
-    iphone: [
-      "https://wishmaster.me/upload/resize_cache/webp/resize_cache/iblock/0eb/300_300_1/9r7hu0p7b95ifigaywzouswm4fq6lvhw.webp",
-      "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?auto=format&fit=crop&w=1200&q=80",
-    ],
-    samsung: [
-      "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&w=1200&q=80",
-    ],
-    redmi: [
-      "https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1200&q=80",
-    ],
-    dyson: [
-      "https://images.unsplash.com/photo-1522338140262-f46f5913618a?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?auto=format&fit=crop&w=1200&q=80",
-    ],
-    ipad: [
-      "https://images.unsplash.com/photo-1545239351-1141bd82e8a6?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1585790050230-5dd28404ccb9?auto=format&fit=crop&w=1200&q=80",
-    ],
-    macbook: [
-      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=1200&q=80",
-    ],
-  };
+
   
   const withDefaults = (p) => ({
     currency: "AZN",
@@ -59,8 +34,8 @@ const images = {
       },
       featured: true,
       popular: true,
-      mainImage: images.iphone[0],
-      gallery: images.iphone,
+      mainImage: images.https://kontakt.az/media/catalog/product/cache/9401ea41f0a7055d2fa261226a20793b/t/m/tm-dg-sbp-1105-sm-1510_12.png,
+      gallery: images.https://kontakt.az/media/catalog/product/cache/9401ea41f0a7055d2fa261226a20793b/t/m/tm-dg-sbp-1105-sm-1510_44.png,
       createdAt: "2025-02-10",
     }),
     withDefaults({
