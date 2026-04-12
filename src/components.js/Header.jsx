@@ -1,23 +1,44 @@
+
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import siteData from "../data.js/siteData";
+import {
+  generateWhatsAppUrl,
+  hasValidWhatsAppNumber,
+} from "../utils/whatsapp";
 
 const LOGO_URL =
   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRv48Ml6ofYQmcqUE2cdyzq21hLiw23ZqChJw&s";
 
-const CATALOG_ITEMS = [
-  { label: "Smartfonlar" },
-  { label: "Smart saatlar" },
-  { label: "Noutbuklar" },
-  { label: "Planşetlər" },
-  { label: "Aksesuarlar" },
-  { label: "Digər" },
+/* ── Əsas naviqasiya linkləri ── */
+const NAV_LINKS = [
+  { to: "/", label: "Ana səhifə", end: true, icon: "🏠" },
+  { to: "/products", label: "Məhsullar", icon: "📦" },
+  { to: "/contact", label: "Əlaqə", icon: "📞" },
+  { to: "/cart", label: "Səbət", icon: "🛒" },
+  { to: "/checkout", label: "Sifariş", icon: "✅" },
+];
+
+/* ── Kateqoriyalar ── */
+const CATEGORIES = [
+  { label: "Smartfonlar", icon: "📱" },
+  { label: "Smart saatlar", icon: "⌚" },
+  { label: "Noutbuklar", icon: "💻" },
+  { label: "Planşetlər", icon: "📟" },
+  { label: "Aksesuarlar", icon: "🎧" },
+  { label: "Digər", icon: "📦" },
 ];
 
 export default function Header({ cartCount = 0, products = [] }) {
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [catsOpen, setCatsOpen] = useState(false);
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
+
+  const closeDrawer = () => {
+    setDrawerOpen(false);
+    setCatsOpen(false);
+  };
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -28,16 +49,31 @@ export default function Header({ cartCount = 0, products = [] }) {
     }
   };
 
+  const handleWhatsApp = () => {
+    if (!hasValidWhatsAppNumber()) {
+      alert("WhatsApp nömrəsi düzgün qurulmayıb.");
+      return;
+    }
+    const url = generateWhatsAppUrl(`Salam, ${siteData.businessName}!`);
+    window.location.href = url;
+    closeDrawer();
+  };
+
+  const activeCls = ({ isActive }) =>
+    `catalog-link${isActive ? " active" : ""}`;
+
   return (
     <>
-      {/* ── Qara header bar ── */}
+      {/* ══════════════ QARA HEADER BAR ══════════════ */}
       <header className="header">
         <div className="container header-inner">
-          {/* Sol — 3 xətli icon (sözsüz) */}
+
+          {/* Sol — 3 xətli icon */}
           <button
             className="catalog-btn"
             onClick={() => setDrawerOpen(true)}
             aria-label="Menyunu aç"
+            aria-expanded={drawerOpen}
           >
             <svg
               width="22"
@@ -118,15 +154,22 @@ export default function Header({ cartCount = 0, products = [] }) {
         </div>
       </header>
 
-      {/* ── Catalog Drawer ── */}
+      {/* ══════════════ DRAWER ══════════════ */}
       {drawerOpen && (
-        <div className="catalog-backdrop" onClick={() => setDrawerOpen(false)}>
+        <>
+          {/* Overlay */}
+          <div
+            className="catalog-backdrop"
+            onClick={closeDrawer}
+            aria-hidden="true"
+          />
+
+          {/* Drawer panel */}
           <nav
             className="catalog-drawer"
-            onClick={(e) => e.stopPropagation()}
             role="dialog"
             aria-modal="true"
-            aria-label="Kataloq menyusu"
+            aria-label="Əsas menyu"
           >
             {/* Drawer başlıq */}
             <div className="catalog-drawer-head">
@@ -134,7 +177,7 @@ export default function Header({ cartCount = 0, products = [] }) {
                 to="/"
                 className="header-brand"
                 style={{ color: "#111" }}
-                onClick={() => setDrawerOpen(false)}
+                onClick={closeDrawer}
               >
                 <img
                   src={LOGO_URL}
@@ -146,14 +189,16 @@ export default function Header({ cartCount = 0, products = [] }) {
                     borderRadius: 8,
                   }}
                 />
-                <span>
-                  TechWay<span style={{ color: "#e11d48" }}>Baku</span>
+                <span style={{ color: "#111" }}>
+                  TechWay
+                  <span style={{ color: "#e11d48" }}>Baku</span>
                 </span>
               </Link>
+
               <button
                 className="drawer-close"
-                onClick={() => setDrawerOpen(false)}
-                aria-label="Bağla"
+                onClick={closeDrawer}
+                aria-label="Menyunu bağla"
               >
                 <svg
                   width="20"
@@ -172,36 +217,138 @@ export default function Header({ cartCount = 0, products = [] }) {
 
             {/* Drawer body */}
             <div className="catalog-drawer-body">
-              <p className="catalog-section-title">Kateqoriyalar</p>
-              {CATALOG_ITEMS.map((item) => (
-                <Link
-                  key={item.label}
-                  to={`/products?category=${encodeURIComponent(item.label)}`}
-                  className="catalog-link"
-                  onClick={() => setDrawerOpen(false)}
+
+              {/* ── Əsas naviqasiya ── */}
+              <p className="catalog-section-title">Menyu</p>
+
+              {NAV_LINKS.map((item) => (
+                <NavLink
+                  key={item.to}
+                  to={item.to}
+                  end={item.end}
+                  className={activeCls}
+                  onClick={closeDrawer}
                 >
-                  <span style={{ fontSize: 18 }}>{item.icon}</span>
+                  <span style={{ fontSize: 16 }}>{item.icon}</span>
                   {item.label}
-                </Link>
+                </NavLink>
               ))}
 
+              {/* ── Kateqoriyalar (accordion) ── */}
               <p className="catalog-section-title" style={{ marginTop: 20 }}>
-                Əlaqə
+                Kateqoriyalar
               </p>
+
+              {/* Accordion toggle */}
+              <button
+                type="button"
+                onClick={() => setCatsOpen((v) => !v)}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  width: "100%",
+                  padding: "10px 12px",
+                  border: 0,
+                  borderRadius: 10,
+                  background: catsOpen ? "#fee2e2" : "#f3f4f6",
+                  color: catsOpen ? "#e11d48" : "#111827",
+                  fontSize: 14,
+                  fontWeight: 700,
+                  cursor: "pointer",
+                  transition: "background .15s",
+                  marginBottom: 4,
+                }}
+                aria-expanded={catsOpen}
+              >
+                <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                  <span style={{ fontSize: 16 }}>📂</span>
+                  Kateqoriyalar
+                </span>
+                {/* Chevron */}
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  style={{
+                    transform: catsOpen ? "rotate(180deg)" : "rotate(0deg)",
+                    transition: "transform .2s",
+                  }}
+                >
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </button>
+
+              {/* Kateqoriya siyahısı */}
+              {catsOpen && (
+                <div
+                  style={{
+                    paddingLeft: 8,
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 2,
+                    animation: "dropDown .15s ease",
+                  }}
+                >
+                  {CATEGORIES.map((cat) => (
+                    <Link
+                      key={cat.label}
+                      to={`/products?category=${encodeURIComponent(cat.label)}`}
+                      className="catalog-link"
+                      style={{ fontSize: 13 }}
+                      onClick={closeDrawer}
+                    >
+                      <span style={{ fontSize: 15 }}>{cat.icon}</span>
+                      {cat.label}
+                    </Link>
+                  ))}
+                </div>
+              )}
+
+              {/* ── Əlaqə və Kömək ── */}
+              <p className="catalog-section-title" style={{ marginTop: 20 }}>
+                Digər
+              </p>
+
+              {/* WhatsApp-da yaz */}
+              <button
+                type="button"
+                className="catalog-link"
+                style={{
+                  width: "100%",
+                  border: 0,
+                  background: "transparent",
+                  cursor: "pointer",
+                  textAlign: "left",
+                }}
+                onClick={handleWhatsApp}
+              >
+                <span style={{ fontSize: 16 }}>💬</span>
+                WhatsApp-da yaz
+              </button>
+
+              {/* Əlaqə məlumatları */}
               <div
                 style={{
-                  padding: "8px 12px",
-                  fontSize: 13,
+                  marginTop: 12,
+                  padding: "10px 12px",
+                  background: "#f9fafb",
+                  borderRadius: 10,
+                  fontSize: 12,
                   color: "#6b7280",
-                  lineHeight: 1.7,
+                  lineHeight: 1.8,
                 }}
               >
-                <div>{siteData.phone}</div>
-                <div>{siteData.address}</div>
+                <div>📞 {siteData.phone}</div>
+                <div>📍 {siteData.address}</div>
               </div>
             </div>
           </nav>
-        </div>
+        </>
       )}
     </>
   );
