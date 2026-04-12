@@ -1,6 +1,6 @@
 const images = {
     iphone: [
-      "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1200&q=80",
+      "https://wishmaster.me/upload/resize_cache/webp/resize_cache/iblock/0eb/300_300_1/9r7hu0p7b95ifigaywzouswm4fq6lvhw.webp",
       "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?auto=format&fit=crop&w=1200&q=80",
     ],
     samsung: [
