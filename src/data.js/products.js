@@ -1,4 +1,30 @@
-
+const images = {
+    iphone: [
+      "https://https://www.apple.com/newsroom/images/product/iphone/geo/Apple-iPhone-14-Pro-iPhone-14-Pro-Max-silver-220907-geo_inline.jpg.large.jpg",
+      "https://theapplewiki.com/images/applewiki/thumb/5/58/IPhone_14_Pro_Max.png/1200px-IPhone_14_Pro_Max.png",
+    ],
+    samsung: [
+      "https:https://static.alaneesqatar.qa/2016/01/Smooth-castor-wheels-2025-01-21T164611-080_Z4-CQ0kryC.png",
+      "https:https://storage.ghost.io/c/c2/03/c203530f-f8d7-44e0-8253-441466ca83ad/content/images/2025/01/s25ultra1-1-.jpg",
+    ],
+    redmi: [
+      "https://cdn.akakce.com/z/xiaomi/xiaomi-redmi-note-13.jpg",
+      "https://cdn.akakce.com/z/xiaomi/xiaomi-redmi-note-13.jpg",
+    ],
+    dyson: [
+      "https://www.arizon.az/storage/photos/Mehsullar/Fen/daysonGold/7.jpg",
+      "https://www.arizon.az/storage/photos/Mehsullar/Fen/daysonGold/7.jpg",
+    ],
+    ipad: [
+      "https://kontakt.az/media/catalog/product/cache/fbd42596869cc4deb59edfc1ed742a64/N/e/New-Project-31_1_1.jpg",
+      "https://kontakt.az/media/catalog/product/cache/fbd42596869cc4deb59edfc1ed742a64/N/e/New-Project-31_1_1.jpg",
+    ],
+    macbook: [
+      "https://laptopmedia.com/wp-content/uploads/2025/03/skyblue1-scaled-e1741211729134.jpg",
+      "https://laptopmedia.com/wp-content/uploads/2025/03/skyblue1-scaled-e1741211729134.jpg",
+    ],
+  };
+  
   
   const withDefaults = (p) => ({
     currency: "AZN",
@@ -34,8 +60,8 @@
       },
       featured: true,
       popular: true,
-      mainImage: images.https://kontakt.az/media/catalog/product/cache/9401ea41f0a7055d2fa261226a20793b/t/m/tm-dg-sbp-1105-sm-1510_12.png,
-      gallery: images.https://kontakt.az/media/catalog/product/cache/9401ea41f0a7055d2fa261226a20793b/t/m/tm-dg-sbp-1105-sm-1510_44.png,
+      mainImage: images.iphone[0],
+      gallery: images.iphone,
       createdAt: "2025-02-10",
     }),
     withDefaults({
